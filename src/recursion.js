@@ -7,8 +7,7 @@ function parseObj(obj, ...args) {
 
 	var props = Object.getOwnPropertyNames(obj);
 	if (!props.length) {
-		console.log(obj, '..................层级关系: ', args.map(item=>item.key).join('.'));
-
+		console.log(obj, '..................: ', args.map(item=>item.key).join('.'));
 	} else {
 		props.forEach(function(item, idx) {
 			var val = obj[item];
@@ -20,9 +19,8 @@ function parseObj(obj, ...args) {
 				case 'Object':
 					parseObj(val, ...args.concat({ key: item, type: 'object' }));
 					break;
-				//  number, string, null, undefined
 				default:
-					console.log(item, '...........', val, '.......层级关系: ', args.concat(item).map(item=>item.key).join('.'));
+					console.log(item, '...........', val, '.......: ', args.concat(item).map(item=>item.key).join('.'));
 			}
 		});
 	}
@@ -41,9 +39,9 @@ function parseArray(arr, ...args) {
 				break;
 			//  number, string, null, undefined
 			default:
-				console.log(arrEleOriginType, '...........数组内部元素.......层级关系: ', args);
+				console.log(arrEleOriginType, args);
 		}
-	}) : console.log(arr, '..................层级关系: ', args.map(item=>item.key).join('.'));
+	}) : console.log(arr, args.map(item=>item.key).join('.'));
 }
 
 function parseData(obj) {

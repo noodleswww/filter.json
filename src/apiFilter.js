@@ -1,12 +1,16 @@
-/* eslint-disable */
-
+/**
+ * original type
+ * @param obj
+ * @returns {string}
+ */
 function getOriginType(obj) {
-	var reg = /Number|String|Object|Array|Null|Undefined/;
+	var reg = /Number|String|Object|Array|Null|Undefined|Boolean/;
 	return Object.prototype.toString.call(obj).match(reg).toString();
 }
 
-
+//	cache your request api data
 let apiData;
+//	cache your predefined json Schema
 let schemaData;
 
 /**
@@ -29,6 +33,7 @@ let schemaData;
 export default function parseApiDataFromSchema(obj, ...args) {
 
 	+function(obj, ...args) {
+		//	cached data and schema from params and delete them
 		if (args[0].api && args[0].schema) {
 			apiData = args[0].api;
 			schemaData = args[0].schema;
@@ -41,7 +46,7 @@ export default function parseApiDataFromSchema(obj, ...args) {
 		if (!props.length) {
 			//  console.log(obj, '..................level: ', args.map(item=>item.key).join('.'));
 		} else {
-			props.forEach(function(item) {
+			props.forEach(item => {
 				const val = obj[item];
 				const originType = getOriginType(val);
 
@@ -51,23 +56,25 @@ export default function parseApiDataFromSchema(obj, ...args) {
 				apiTmpArr.shift();
 				apiTmpArr.unshift({ key: 'apiData', type: 'object' });
 
-				//   eval 执行字符串
+				//   eval str
 				const schemaEvalStr = schemaTmpArr.map(objItem => objItem.key).join('.');
 				const apiEvalStr = apiTmpArr.map(objItem => objItem.key).join('.');
 
-				//  eval 执行后结果
+				//  eval res
 				let apiEval;
 				let schemaEval;
 				eval('apiEval = ' + apiEvalStr);
 				eval('schemaEval = ' + schemaEvalStr);
 
+				//	judge type
 				switch (originType) {
 					case 'Array':
 						if (getOriginType(apiEval) !== getOriginType(schemaEval)) {
 							eval(apiEvalStr + ' = ' + schemaEvalStr);
 						}
-
+						//	 TODO do other things
 						break;
+
 					case 'Object':
 						if (getOriginType(apiEval) !== getOriginType(schemaEval)) {
 							eval(apiEvalStr + ' = ' + schemaEvalStr);
@@ -75,12 +82,13 @@ export default function parseApiDataFromSchema(obj, ...args) {
 							parseApiDataFromSchema(val, ...args.concat({ key: item, type: 'object' }));
 						}
 						break;
-					//  number, string, null, undefined
+
 					default:
+						//	number, string, null, undefined
 						if (getOriginType(apiEval) !== getOriginType(schemaEval)) {
 							eval(apiEvalStr + ' = ' + schemaEvalStr);
 						}
-					//  console.log(item, '...........', val, '.......层级关系: ', args.concat(item).map(item=>item.key).join('.'));
+					//	console.log(item, '...........', val, '.......层级关系: ', args.concat(item).map(item=>item.key).join('.'));
 				}
 			});
 		}
