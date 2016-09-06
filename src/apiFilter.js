@@ -15,21 +15,15 @@ let schemaData;
 
 /**
  *
- * @param obj 要过滤的数据结构模型
- * @param args  模块内部会缓存上一次执行解析的api载体名称
+ * @param obj The data structure model of filtering
+ * @param args  cached array
  *
  * ```js
- * // 调用方式
- * const apiBkData = await xxProxy.fetchData(xx);
- * const conditionSchema = xxProxy.conditionSchema;
- * parseApiDataFromSchema(conditionSchema, { key: 'conditionSchema', type: 'object', api: 'apiBkData' });
- * key: schema对象名称; type: 数据类型; api: 临时api返回对象的载体名称
+ * const apiData = await xxProxy.fetchData(xx);
+ * const awesomeSchema = xxProxy.conditionSchema;
+ * const bkFilterData = parseApiDataFromSchema(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
  * ```
- *
- * 经过过滤的数据都严格按照自定义Schema匹配, 前段渲染只需要考虑 数组内部类型,
- * 目前 仅支持到数据, 后续将补充数组内部嵌套更复杂的数据类型
- * 例如: >二维数组, [{}], 或者包装成数组的更复杂的数据类型, 避免渲染空指针
- */
+ * */
 export default function parseApiDataFromSchema(obj, ...args) {
 
 	+function(obj, ...args) {
