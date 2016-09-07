@@ -81,7 +81,7 @@ import filterJson from 'filter.json';
 const bkFilterData = filterJson(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
 ```
 
-es5 using
+* es5 using
 
 ```js
 var filterJson = require('filter.json');
