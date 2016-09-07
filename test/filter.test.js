@@ -1,8 +1,7 @@
 
 import test from 'ava';
 import parseApiDataFromSchema from '../src/apiFilter';
-import filterJson from '../dist/apiFilter';
-const filterJson2 = require('../dist/apiFilter');
+const filterJson = require('../dist/apiFilter');
 
 const awesomeSchema = {
 	error: false,
@@ -31,16 +30,22 @@ const apiData = {
 	},
 	message: '获取数据成功',
 };
-console.log(filterJson);
-console.log(filterJson2);
+
 test('module filter.json', t => {
 	let api = () => {
-		const bkFilterData = parseApiDataFromSchema(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
-		t.is(Object.prototype.toString.call(bkFilterData.data.top.mixed), '[object Array]');
-		t.is(Object.prototype.toString.call(bkFilterData.data.top.basic), '[object Array]');
-		t.is(Object.prototype.toString.call(bkFilterData.data.setup.title), '[object Object]');
-		t.falsy(bkFilterData.api);
-		t.true(bkFilterData.sCache);
+		const bkFilterDataES6 = parseApiDataFromSchema(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
+		t.is(Object.prototype.toString.call(bkFilterDataES6.data.top.mixed), '[object Array]');
+		t.is(Object.prototype.toString.call(bkFilterDataES6.data.top.basic), '[object Array]');
+		t.is(Object.prototype.toString.call(bkFilterDataES6.data.setup.title), '[object Object]');
+		t.falsy(bkFilterDataES6.api);
+		t.true(bkFilterDataES6.sCache);
+
+		const bkFilterDataES5 = filterJson.default(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
+		t.is(Object.prototype.toString.call(bkFilterDataES5.data.top.mixed), '[object Array]');
+		t.is(Object.prototype.toString.call(bkFilterDataES5.data.top.basic), '[object Array]');
+		t.is(Object.prototype.toString.call(bkFilterDataES5.data.setup.title), '[object Object]');
+		t.falsy(bkFilterDataES5.api);
+		t.true(bkFilterDataES5.sCache);
 	};
 	api();
 	t.pass();
