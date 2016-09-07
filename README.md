@@ -136,7 +136,7 @@ top: { basic: [{},{}]}
 
 
 
-## Test AVA
+## Test
 
 * configuration for ava es6
 ```
@@ -155,7 +155,7 @@ top: { basic: [{},{}]}
 
 
 
-## Babel ES6
+## Babel
 
 ```
 {
@@ -179,7 +179,7 @@ top: { basic: [{},{}]}
 
 
 
-## Hook es5
+## Hook
 
 ```
 "scripts": {
