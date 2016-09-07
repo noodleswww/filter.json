@@ -1,6 +1,8 @@
 
 import test from 'ava';
 import parseApiDataFromSchema from '../src/apiFilter';
+import filterJson from '../dist/apiFilter';
+const filterJson2 = require('../dist/apiFilter');
 
 const awesomeSchema = {
 	error: false,
@@ -29,7 +31,8 @@ const apiData = {
 	},
 	message: '获取数据成功',
 };
-
+console.log(filterJson);
+console.log(filterJson2);
 test('module filter.json', t => {
 	let api = () => {
 		const bkFilterData = parseApiDataFromSchema(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });

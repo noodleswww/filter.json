@@ -75,9 +75,14 @@ the apiData interface json must be the same as the `awesomeSchema`
 
 ### Import and Run
 
-```js
-import parseApiDataFromSchema from 'filter.json';
-const bkFilterData = parseApiDataFromSchema(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
+```js es6 (babel 6 reqquired)
+import filterJson from 'filter.json';
+const bkFilterData = filterJson(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
+````
+
+```js es5
+var filterJson = require('filter.json');
+const bkFilterData = filterJson.default(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
 ````
 
 bkFilterData will be reorganized in strict accordance with the predefined Schema, even if the api json data of a field key is changed,
