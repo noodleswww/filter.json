@@ -74,16 +74,19 @@ const apiData = await request.get/post('http://test.com/api/xxx')
 the apiData interface json must be the same as the `awesomeSchema`
 
 ### Import and Run
+* es6 using
 
-```js es6 (babel 6 reqquired)
+```js
 import filterJson from 'filter.json';
 const bkFilterData = filterJson(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
-````
+```
 
-```js es5
+es5 using
+
+```js
 var filterJson = require('filter.json');
 const bkFilterData = filterJson.default(awesomeSchema, { type: 'object', api: apiData, schema: awesomeSchema });
-````
+```
 
 bkFilterData will be reorganized in strict accordance with the predefined Schema, even if the api json data of a field key is changed,
 it will be assigned according to the Schema of the pre setting.
