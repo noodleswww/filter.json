@@ -3,7 +3,7 @@ logs
 *.log
 npm-debug.log*
 .idea
-dist
+node_modules
 
 # Runtime data
 pids

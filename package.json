@@ -2,7 +2,7 @@
   "name": "filter.json",
   "version": "1.0.0",
   "description": "filter api data by your schema",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
