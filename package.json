@@ -1,6 +1,6 @@
 {
   "name": "filter.json",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "filter api data by your schema",
   "main": "index.js",
   "directories": {
