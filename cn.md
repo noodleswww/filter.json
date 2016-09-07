@@ -18,11 +18,11 @@ filter your api data from your schema
 
 
 ## Why filter.json
-* Front-end to render data depends json data returned by the remote interface, of course, the value will be returned in accordance with the interface data format, exp. `api.user.name` 。
-* But unavoidable changes in the interface data or due to improper handling of back office staff to return to the non-conforming data interface.
-* If the background user data field returns null / '' / [], if you use ejs or other template engine will cause the page Ben collapse, if it is in a production environment, it will cause great losses.
-* filter.json born to do this, it will follow the model of the remote interface data structure of the data requested strict filtering, the data field does not conform to the agreement will be replaced by their corresponding data types.
-* Even if the interface changes, or changing data types other causes, to ensure the normal rendering of the front page.
+* 前段渲染界面的数据依赖远程接口返回的json数据, 当然会按照接口返回的数据格式进行取值, 例如 `api.user.name` 。
+* 但避免不了接口数据变动或者由于后台人员处理不当,返回了不符合约定的数据接口。
+* 假如后台数据user字段返回了null/''/[], 如果你使用ejs或者其他模板引擎将会导致页面奔溃,如果是在生产环境,将会造成很大的损失。
+* filter.json 为此而生, 它会按照远程接口的数据结构模型 对请求的数据进行严格的过滤, 对于不符合约定的数据字段将会被替换成对应的数据类型。
+* 即使接口变动,或者其他原因造成的数据类型改变, 保证了前段页面的正常渲染。 
 
 
 ## Usage
@@ -83,6 +83,7 @@ const bkFilterData = parseApiDataFromSchema(awesomeSchema, { type: 'object', api
 bkFilterData will be reorganized in strict accordance with the predefined Schema, even if the api json data of a field key is changed,
 it will be assigned according to the Schema of the pre setting.
 
+
 here is the api data json, do not same with Schema
 
 ```js
@@ -97,7 +98,7 @@ const apiData = {
 			basic: null,
 		},
 	},
-	message: 'msg ok',
+	message: '获取数据成功',
 };
 ````
 and the result will be
@@ -114,25 +115,25 @@ and the result will be
 		    basic: [],
 	    },
     },
-    message: 'msg ok'
+    message: '获取数据成功'
 };
 ````
 
-you can see the filed `error, setup, basic` will be restored by predefined Schema.
-If you execute `apiData.data.top.basic.map` have no error. or it will throw an error.
+`error, setup, basic` 将会按照预定义的数据模型,进行类型替换,保证数据结构的完整性
+如果执行 `apiData.data.top.basic.map` 会正常运行. 否则将会抛出空指针错误.
 
 
 
 ## Notes
-* the predefined Schema suggest Array is the lowest js type
+* 定义的数据接口中,建议Array不进行内部嵌套
 ```js
 top: { basic : []}
 ````
-* but also defined like this
+* 但仍可以这样定义
 ```js
 top: { basic: [{},{}]}
 ```
-* if the basic field is null, the filter return data will be `basic: [{},{}]`
+* 如果api返回数据中basic字段为null或其他未知类型, 则将会以预定义的规则进行替换
 
 
 
@@ -151,7 +152,7 @@ top: { basic: [{},{}]}
     "require": "babel-core/register"
   }
 ```
-> `"require": "babel-core/register"` is important, so you must execute install `babel-core`.
+> `"require": "babel-core/register"` 必须, 安装 `babel-core`.
 
 
 
