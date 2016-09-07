@@ -1,1 +1,1 @@
-module.exports = require('./src/apiFilter');
+module.exports = require('./dist/apiFilter');
