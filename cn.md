@@ -75,7 +75,9 @@ the apiData interface json must be the same as the `awesomeSchema`
 
 ### Import and Run
 
-* es6
+* es6 
+
+> `filter.json` 本身依赖babel>6, 所以使用时项目内置babel版本应当也使用>6版本，否则可能会与低版本的babel冲突，且造成意想不到的错误
 
 ```js
 import parseApiDataFromSchema from 'filter.json';

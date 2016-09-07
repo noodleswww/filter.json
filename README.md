@@ -74,7 +74,9 @@ const apiData = await request.get/post('http://test.com/api/xxx')
 the apiData interface json must be the same as the `awesomeSchema`
 
 ### Import and Run
-* es6 using
+* es6 using 
+
+> Itself dependent babel > 6 , so when using the built- babel project version should also use > 6 version , or it may be a low version of babel conflict and cause unexpected errors
 
 ```js
 import filterJson from 'filter.json';
