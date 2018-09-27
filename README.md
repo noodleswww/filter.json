@@ -1,4 +1,4 @@
-# filter.json
+# filter.json :sparkles:
 
 [![NPM](https://nodei.co/npm/filter.json.png)](https://nodei.co/npm/filter.json/)
 [![Build Status](https://secure.travis-ci.org/noodleswww/filter.json.png)](https://travis-ci.org/noodleswww/filter.json)
